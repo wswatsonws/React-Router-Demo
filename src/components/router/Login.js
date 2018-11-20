@@ -1,13 +1,74 @@
-import React from "react";
+
+import React, {Component} from 'react';
+import TextField from "material-ui/TextField";
+//import Card from "material-ui/Card";
+//import SelectField from 'material-ui/SelectField';
+import RaisedButton from 'material-ui/RaisedButton';
+//import MenuItem from 'material-ui/MenuItem';
 
 
 
 
-const Login = () => {
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import AppBar from 'material-ui/AppBar';
+import Register from './Register';
+//import RaisedButton from 'material-ui/RaisedButton';
+//import TextField from 'material-ui/TextField';
+class Login extends Component {
+
+constructor(props){
+        super(props);
+        this.state={
+        username:'',
+        password:''
+    }
+ }
+handleClick(){
+    console.log('this is:',this);
+    const w=window.open('about:blank');
+    w.location.href='/'
+}
+render() {
     return (
-        <div className="App">
-             <p>Login</p>
-        </div>
+      <div>
+        <MuiThemeProvider>
+          <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+          <AppBar
+             title="Login"
+           />
+           <TextField
+             hintText="Enter your Username"
+             floatingLabelText="Username"
+             onChange = {(event,newValue) => this.setState({username:newValue})}
+             />
+           <br/>
+             <TextField
+               type="password"
+               hintText="Enter your Password"
+               floatingLabelText="Password"
+               onChange = {(event,newValue) => this.setState({password:newValue})}
+               />
+             <br/>
+             <RaisedButton label="Login" primary={true} style={{width: "10em", alignSelf: "center"}} onClick={(event) => this.handleClick(event)}/>
+            
+             <h5 style={{alignSelf: "center"}} >Not registered, Register Now</h5>
+             <RaisedButton label="Register" primary={true} style={{width: "10em", alignSelf: "center"}} 
+             onClick={() => this.props.history.push({
+                pathname: '/register',
+                state: {
+                    id: 3
+                }
+                })}
+
+
+             />
+         </div>
+         </MuiThemeProvider>
+      </div>
     );
+  }
+}
+const style = {
+ margin: 15,
 };
 export default Login;

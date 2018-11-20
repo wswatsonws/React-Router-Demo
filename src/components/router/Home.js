@@ -1,15 +1,36 @@
-import React from "react";
-import logo from '../../logo.svg';
+import React, { Component } from 'react';
+import logo, { ReactComponent } from '../../logo.svg';
 import '../../App.css';
 
 import NameCard from '../NameCard';
 import LikesButton from '../LikesButton';
 import DigitalClock from '../DigitalClock'
-import CommentBox from '../CommentBox'
+import CommentBox from '../CommentBox';
+import CommentList from '../CommentList';
 
-const tags = ['空灵', '神经质']
+const tags = ['空灵', '神经质'];
 
-const Home = () => {
+
+
+class Home extends Component{
+//const Home = () => {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      comments: ['this is my first reply']
+    }
+    this.addComment = this.addComment.bind(this)
+  }
+  addComment(comment){
+    this.setState({
+      comments: [...this.state.comments, comment]
+    })
+
+  }
+
+  render(){
+    const { comments } = this.state
     return (
         <div className="App">
         <header className="App-header">
@@ -31,12 +52,18 @@ const Home = () => {
         <NameCard name="Watson" number={34567890} isHuman tags={tags} />
         <LikesButton  />
         <DigitalClock />
-      <CommentBox />
+        <CommentList comments={comments} />
+       
+        <CommentBox  commentsLength={comments.length} onAddComment={this.addComment} />
+
 
       
       
       </div>
     );
+  }
 
-};
+
+}
+//};
 export default Home;
